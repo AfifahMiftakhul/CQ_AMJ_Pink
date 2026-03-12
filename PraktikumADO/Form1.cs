@@ -147,6 +147,11 @@ namespace PraktikumADO
 
                 string query = "INSERT INTO ProgramStudi VALUES ('MI01','Manajemen Informatika')";
                 cmd = new SqlCommand(query, conn);
+                int hasil = cmd.ExecuteNonQuery();
+                MessageBox.Show("Jumlah baris terpengaruh: " + hasil);
+                txtHasil.Text = "Insert Prodi berhasil, " + hasil + " baris ditambahkan";
+
+                conn.Close();
             }
         }
 }
