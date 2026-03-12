@@ -32,6 +32,8 @@ namespace PraktikumADO
             catch (Exception ex) {
 
         }
+            MessageBox.Show("Koneksi Gagal: " + 
+                ex.Message);
         }
     }
 }
