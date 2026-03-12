@@ -11,6 +11,13 @@ namespace PraktikumADO
         public Form1()
         {
 
+            InitializeComponent();
+        }
+        private void Koneksi()
+        {
+            conn = new SqlConnection(
+                "Data Source=DESKTOP-4G4UMV8\\AFIFAH ; Initial Catalog=DBAkademiADO;Integrated Security=True");
+        }
         private void btnConnect_Click(object sender, EventArgs e)
         {
             try
