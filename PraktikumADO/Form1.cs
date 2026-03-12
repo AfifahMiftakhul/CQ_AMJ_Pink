@@ -99,6 +99,15 @@ namespace PraktikumADO
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-    }
+        private void btnHitungDosen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Koneksi();
+                conn.Open();
+
+                string query = "SELECT COUNT(*) FROM Dosen";
+                cmd = new SqlCommand(query, conn);
+            }
         }
 }
