@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 
 namespace PraktikumADO
 {
@@ -18,6 +19,46 @@ namespace PraktikumADO
             conn = new SqlConnection(
                 "Data Source=DESKTOP-4G4UMV8\\AFIFAH ; Initial Catalog=DBAkademiADO;Integrated Security=True");
         }
+        private void label1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (conn == null)
+                {
+                    MessageBox.Show("klick tombol connect .",
+                        "informasi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                  
+                    string info = "APLIKASI PRAKTIKUM ADO.NET\n\n" +
+                                 "Fungsi Tombol:\n" +
+                                 "• Connect : Membuka koneksi database\n" +
+                                 "• Hitung Mahasiswa : jumlah data mahasiswa\n" +
+                                 "• Hitung Matakuliah :  jumlah data matakuliah\n" +
+                                 "• Update Mahasisw jumlah dosen\n" +
+                                 "• Update SKS :  SKS matakuliah\n" +
+                                 "• Insert Prodi :  data program studi\n\n" +
+                                 $"Status Koneksi: {(conn.State == System.Data.ConnectionState.Open ? "Terbuka" : "Tertutup")}\n" +
+                                 $"Server: DESKTOP-RAM2OFI\\APRILIYA\n" +
+                                 $"Database: DBAkademikADO";
+
+                    MessageBox.Show(info,
+                                  "Informasi Aplikasi",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saat menampilkan informasi: " + ex.Message);
+            }
+        
+
+    
+        }
         private void btnConnect_Click(object sender, EventArgs e)
         {
             try
@@ -29,14 +70,15 @@ namespace PraktikumADO
                 MessageBox.Show("Koneksi Berhasil");
                 conn.Close();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
+                MessageBox.Show("Koneksi Gagal: " +
+                    ex.Message);
+            }
         }
-            MessageBox.Show("Koneksi Gagal: " + 
-                ex.Message);
-        }
-    }
-    private void btnHitungMhs_Click(object sender, EventArgs e)
+
+        private void btnHitungMhs_Click(object sender, EventArgs e)
         {
             try
             {
@@ -47,7 +89,7 @@ namespace PraktikumADO
                 cmd = new
                     SqlCommand(query, conn);
                 int jumlah = (int)cmd.ExecuteScalar();
-                txtHasil.Text = "Jumlah Mahasiswa: " + jumlah.ToString();
+                textHasil.Text = "Jumlah Mahasiswa: " + jumlah.ToString();
 
                 conn.Close();
             }
@@ -57,7 +99,6 @@ namespace PraktikumADO
             }
         }
 
-        // PRAKTIKUM 3: Menghitung Jumlah Mata Kuliah (ExecuteScalar)
         private void btnHitungMK_Click(object sender, EventArgs e)
         {
             try
@@ -69,7 +110,7 @@ namespace PraktikumADO
                 cmd = new SqlCommand(query, conn);
 
                 int jumlah = (int)cmd.ExecuteScalar();
-                txtHasil.Text = "Jumlah Mata Kuliah: " + jumlah.ToString();
+                textHasil.Text = "Jumlah Mata Kuliah: " + jumlah.ToString();
 
                 conn.Close();
             }
@@ -78,7 +119,7 @@ namespace PraktikumADO
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-        // PRAKTIKUM 4: Update Data Mahasiswa (ExecuteNonQuery)
+        
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -90,7 +131,7 @@ namespace PraktikumADO
                 cmd = new SqlCommand(query, conn);
                 int hasil = cmd.ExecuteNonQuery();
                 MessageBox.Show("Jumlah baris terpengaruh: " + hasil);
-                txtHasil.Text = "Update berhasil, " + hasil + " baris diupdate";
+                textHasil.Text = "Update berhasil, " + hasil + " baris diupdate";
 
                 conn.Close();
             }
@@ -109,7 +150,7 @@ namespace PraktikumADO
                 string query = "SELECT COUNT(*) FROM Dosen";
                 cmd = new SqlCommand(query, conn);
                 int jumlah = (int)cmd.ExecuteScalar();
-                txtHasil.Text = "Jumlah Dosen: " + jumlah.ToString();
+                textHasil.Text = "Jumlah Dosen: " + jumlah.ToString();
 
                 conn.Close();
             }
@@ -129,7 +170,7 @@ namespace PraktikumADO
                 cmd = new SqlCommand(query, conn);
                 int hasil = cmd.ExecuteNonQuery();
                 MessageBox.Show("Jumlah baris terpengaruh: " + hasil);
-                txtHasil.Text = "Update SKS berhasil, " + hasil + " baris diupdate";
+                textHasil.Text = "Update SKS berhasil, " + hasil + " baris diupdate";
 
                 conn.Close();
             }
@@ -149,7 +190,7 @@ namespace PraktikumADO
                 cmd = new SqlCommand(query, conn);
                 int hasil = cmd.ExecuteNonQuery();
                 MessageBox.Show("Jumlah baris terpengaruh: " + hasil);
-                txtHasil.Text = "Insert Prodi berhasil, " + hasil + " baris ditambahkan";
+                textHasil.Text = "Insert Prodi berhasil, " + hasil + " baris ditambahkan";
 
                 conn.Close();
             }
