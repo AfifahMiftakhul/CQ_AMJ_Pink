@@ -46,7 +46,21 @@ namespace PraktikumADO
                 string query = "SELECT CIUNT (*) FROM Mahasiswa";
                 cmd = new
                     SqlCommand(query, conn);
-                int jumlah
+                int jumlah = (int)cmd.ExecuteScalar();
+                txtHasil.Text = "Jumlah Mahasiswa: " + jumlah.ToString();
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        // PRAKTIKUM 3: Menghitung Jumlah Mata Kuliah (ExecuteScalar)
+        private void btnHitungMK_Click(object sender, EventArgs e)
+        {
+            try
             }
         }
 }
