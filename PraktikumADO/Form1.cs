@@ -69,6 +69,15 @@ namespace PraktikumADO
                 cmd = new SqlCommand(query, conn);
 
                 int jumlah = (int)cmd.ExecuteScalar();
+                txtHasil.Text = "Jumlah Mata Kuliah: " + jumlah.ToString();
+
+                conn.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+    }
         }
 }
